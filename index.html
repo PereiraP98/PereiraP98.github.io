@@ -3,24 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Portfólio</title>
+  <title>Tech Portfolio</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Roboto', sans-serif;
+      background-color: #1b1b1b;
+      color: #f1f1f1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #111;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      font-size: 24px;
+      color: #00ffff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #00ffff;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://www.linkparaimagem.com/suaimagem.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      color: #00ffff;
+      text-transform: uppercase;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin: 20px 0;
+      max-width: 600px;
+      color: #ccc;
+    }
+
+    .hero a {
+      padding: 15px 30px;
+      background-color: #00ffff;
+      color: #111;
+      text-transform: uppercase;
+      border-radius: 5px;
+      font-size: 18px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero a:hover {
+      background-color: #009999;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about, .projects, .contact {
       padding: 50px;
+      text-align: center;
     }
-    h1 {
-      color: #333;
+
+    .about h2, .projects h2, .contact h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #00ffff;
     }
-    p {
-      color: #666;
+
+    .about p, .projects p, .contact p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    footer {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      color: #ccc;
+    }
+
+    footer p {
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h1>Bem-vindo ao Meu Portfólio</h1>
-  <p>Este é o meu site pessoal onde compartilho meus projetos.</p>
+
+<header>
+  <div class="logo">TechPortfolio</div>
+  <nav>
+    <ul>
+      <li><a href="#about">Sobre Mim</a></li>
+      <li><a href="#projects">Projetos</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Bem-vindo ao meu portfólio</h1>
+  <p>Explore meus projetos e conheça mais sobre o meu trabalho no mundo da tecnologia.</p>
+  <a href="#projects">Ver Projetos</a>
+</section>
+
+<section id="about" class="about">
+  <h2>Sobre Mim</h2>
+  <p>Sou um desenvolvedor apaixonado por tecnologia, especializado em criação de soluções inovadoras para problemas complexos.</p>
+</section>
+
+<section id="projects" class="projects">
+  <h2>Projetos</h2>
+  <p>Aqui você encontrará alguns dos projetos em que trabalhei recentemente. Desde desenvolvimento de aplicativos até soluções web inovadoras.</p>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contato</h2>
+  <p>Entre em contato para discutir projetos ou colaborações. Estou sempre aberto a novas ideias e oportunidades.</p>
+</section>
+
+<footer>
+  <p>&copy; 2024 - TechPortfolio. Todos os direitos reservados.</p>
+</footer>
+
 </body>
 </html>
