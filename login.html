@@ -98,7 +98,11 @@
       const validUsername = 'admin';
       const validPasswordHash = 'ba265c38fb63fe209c42da7df7be5489edb5e8c4b9b81f3458c4bc3db7f36290';
 
+      // Gera o hash da senha inserida pelo usuário
       const enteredPasswordHash = await hash(password);
+
+      // Log para ver o hash gerado da senha inserida
+      console.log("Hash da senha inserida:", enteredPasswordHash);
 
       if (username === validUsername && enteredPasswordHash === validPasswordHash) {
         document.getElementById('errorMessage').style.display = 'none';
