@@ -17,7 +17,7 @@
       color: #e6e6e6;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth; /* Comportamento suave ao rolar */
+      scroll-behavior: smooth;
     }
 
     /* Estilização do Header */
@@ -100,6 +100,7 @@
       text-transform: uppercase;
       border-radius: 25px;
       transition: background-color 0.3s ease;
+      text-decoration: none;
     }
 
     .hero a:hover {
@@ -159,10 +160,16 @@
       margin: 20px;
       transition: transform 0.3s ease;
       width: 300px;
+      text-align: center;
     }
 
     .projects .project-item:hover {
       transform: scale(1.05);
+    }
+
+    .projects .project-item img {
+      width: 100px;
+      margin-bottom: 20px;
     }
 
     .projects .project-item h3 {
@@ -174,6 +181,22 @@
     .projects .project-item p {
       font-size: 16px;
       color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .projects .project-item a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00ffff;
+      color: #1e1e1e;
+      text-transform: uppercase;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .projects .project-item a:hover {
+      background-color: #009999;
     }
 
     /* Seção Contato */
@@ -255,18 +278,14 @@
   <h2>Projetos</h2>
   <div class="project-list">
     <div class="project-item">
-  <h3>Projeto Excel - Gestão de Materiais</h3>
-  <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
-  <a href="projeto1.html">Ver Mais</a>
-</div>
+      <!-- Ícone de Excel -->
+      <img src="https://www.linkparaiconeexcel.com/iconeexcel.png" alt="Ícone Excel">
+      
+      <h3>Projeto Excel - Gestão de Materiais</h3>
+      <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
 
-    <div class="project-item">
-      <h3>Projeto 2</h3>
-      <p>Descrição do Projeto 2. Tecnologias utilizadas: Python, Django.</p>
-    </div>
-    <div class="project-item">
-      <h3>Projeto 3</h3>
-      <p>Descrição do Projeto 3. Tecnologias utilizadas: React, Node.js.</p>
+      <!-- Botão para a página do projeto -->
+      <a href="projeto1.html">Ver Projeto</a>
     </div>
   </div>
 </section>
