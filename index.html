@@ -17,7 +17,7 @@
       color: #e6e6e6;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* Comportamento suave ao rolar */
     }
 
     /* Estilização do Header */
@@ -56,6 +56,7 @@
       font-size: 14px;
       text-decoration: none;
       transition: color 0.3s;
+      cursor: pointer;
     }
 
     nav ul li a:hover {
@@ -281,6 +282,22 @@
 <footer>
   <p>&copy; 2024 - CoreDev. Todos os direitos reservados.</p>
 </footer>
+
+<!-- Script JavaScript para navegação suave -->
+<script>
+  // Seleciona todos os links que apontam para IDs de seções
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const target = document.querySelector(this.getAttribute('href'));
+      
+      target.scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
