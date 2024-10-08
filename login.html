@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoreDev - Login</title>
+  <title>CoreDev - Login Seguro</title>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -83,21 +83,30 @@
   </div>
 
   <script>
-    function login() {
+    async function hash(text) {
+      const msgBuffer = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
+    }
+
+    async function login() {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Validação de login específico para o admin
       const validUsername = 'admin';
-      const validPassword = 'AceSSo#@3038';
+      const validPasswordHash = 'ba265c38fb63fe209c42da7df7be5489edb5e8c4b9b81f3458c4bc3db7f36290';
 
-      if (username === validUsername && password === validPassword) {
+      const enteredPasswordHash = await hash(password);
+
+      if (username === validUsername && enteredPasswordHash === validPasswordHash) {
         document.getElementById('errorMessage').style.display = 'none';
         document.getElementById('welcomeMessage').style.display = 'block';
         localStorage.setItem('loggedIn', 'true');
         setTimeout(() => {
-          window.location.href = 'index.html'; // Redireciona para a página principal
-        }, 1500); // Após 1,5 segundo
+          window.location.href = 'index.html';
+        }, 1500);
       } else {
         document.getElementById('errorMessage').style.display = 'block';
       }
