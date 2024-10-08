@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreDev - Login</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1e1e1e;
+      color: #e6e6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: #222;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 300px;
+    }
+
+    .login-container h2 {
+      color: #00ffff;
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e6e6e6;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00ffff;
+      border: none;
+      border-radius: 5px;
+      color: #1e1e1e;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #009999;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .welcome-message {
+      color: green;
+      font-size: 16px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <p class="error-message" id="errorMessage">Usuário ou senha inválidos!</p>
+    <p class="welcome-message" id="welcomeMessage">Bem-vindo de volta!</p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Validação de login específico para o admin
+      const validUsername = 'admin';
+      const validPassword = 'AceSSo#@3038';
+
+      if (username === validUsername && password === validPassword) {
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('welcomeMessage').style.display = 'block';
+        localStorage.setItem('loggedIn', 'true');
+        setTimeout(() => {
+          window.location.href = 'index.html'; // Redireciona para a página principal
+        }, 1500); // Após 1,5 segundo
+      } else {
+        document.getElementById('errorMessage').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
