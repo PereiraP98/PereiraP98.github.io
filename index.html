@@ -307,17 +307,15 @@
 <script>
   const loginButton = document.getElementById('loginButton');
 
-  // Verifica se o usuário está logado
   if (localStorage.getItem('loggedIn') === 'true') {
     loginButton.textContent = 'Sair';
-    loginButton.href = '#'; // Previne redirecionamento ao login
+    loginButton.href = '#';
     loginButton.onclick = function() {
-      localStorage.removeItem('loggedIn'); // Remove o status de login
-      window.location.reload(); // Atualiza a página
+      localStorage.removeItem('loggedIn');
+      window.location.reload();
     };
   }
 
-  // Navegação suave
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
