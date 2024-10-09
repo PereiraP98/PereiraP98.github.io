@@ -248,6 +248,107 @@
       font-size: 14px;
     }
 
+    /* Media Queries para dispositivos móveis */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 20px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo {
+        margin-bottom: 10px;
+        font-size: 24px;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul li {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section h2 {
+        font-size: 30px;
+      }
+
+      section p {
+        font-size: 16px;
+      }
+
+      .projects .project-item {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .contact form input,
+      .contact form textarea {
+        font-size: 14px;
+      }
+
+      .contact form button {
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      footer p {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      section h2 {
+        font-size: 24px;
+      }
+
+      section p {
+        font-size: 14px;
+      }
+
+      .projects .project-item {
+        padding: 15px;
+      }
+
+      .projects .project-item h3 {
+        font-size: 20px;
+      }
+
+      .projects .project-item p {
+        font-size: 14px;
+      }
+
+      .projects .project-item img {
+        width: 80px;
+      }
+
+      .projects .project-item a {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      footer p {
+        font-size: 10px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -259,7 +360,7 @@
       <li><a href="#about">Sobre Mim</a></li>
       <li><a href="#projects">Projetos</a></li>
       <li><a href="#contact">Contato</a></li>
-      <li><a href="login.html" id="loginButton">Login</a></li> <!-- Botão de Login -->
+      <li><a href="login.html" id="loginButton">Login</a></li>
     </ul>
   </nav>
 </header>
