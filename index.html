@@ -25,7 +25,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
+      padding: 20px;
       background-color: #111;
       position: fixed;
       top: 0;
@@ -39,6 +39,54 @@
       font-size: 28px;
       font-weight: bold;
       letter-spacing: 2px;
+    }
+
+    /* Estilização do botão de hambúrguer */
+    .hamburger {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+    }
+
+    .hamburger div {
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    /* Menu lateral */
+    .side-menu {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      background-color: #111;
+      padding-top: 60px;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    .side-menu a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #e6e6e6;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .side-menu a:hover {
+      background-color: #575757;
+    }
+
+    /* Animação para abrir o menu */
+    .side-menu.open {
+      left: 0;
     }
 
     nav ul {
@@ -355,15 +403,20 @@
 
 <header>
   <div class="logo">CoreDev</div>
-  <nav>
-    <ul>
-      <li><a href="#about">Sobre Mim</a></li>
-      <li><a href="#projects">Projetos</a></li>
-      <li><a href="#contact">Contato</a></li>
-      <li><a href="login.html" id="loginButton">Login</a></li>
-    </ul>
-  </nav>
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </header>
+
+<!-- Menu lateral -->
+<div class="side-menu" id="sideMenu">
+  <a href="#about">Sobre Mim</a>
+  <a href="#projects">Projetos</a>
+  <a href="#contact">Contato</a>
+  <a href="login.html">Login</a>
+</div>
 
 <section class="hero">
   <h1>Bem-vindo ao CoreDev</h1>
@@ -380,11 +433,9 @@
   <h2>Projetos</h2>
   <div class="project-list">
     <div class="project-item">
-      <!-- Ícone de Excel -->
       <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Ícone Excel" style="width: 100px; margin-bottom: 20px;">
       <h3>Projeto Excel - Gestão de Materiais</h3>
       <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
-      <!-- Botão para a página do projeto -->
       <a href="projeto1.html">Ver Projeto</a>
     </div>
   </div>
@@ -407,6 +458,13 @@
 <!-- Script JavaScript para navegação suave e login/logout -->
 <script>
   const loginButton = document.getElementById('loginButton');
+  const hamburger = document.getElementById('hamburger');
+  const sideMenu = document.getElementById('sideMenu');
+
+  // Abrir/Fechar menu lateral
+  hamburger.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+  });
 
   if (localStorage.getItem('loggedIn') === 'true') {
     loginButton.textContent = 'Sair';
@@ -417,6 +475,7 @@
     };
   }
 
+  // Navegação suave
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
