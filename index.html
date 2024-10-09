@@ -41,7 +41,7 @@
       letter-spacing: 2px;
     }
 
-    /* Estilização do botão de hambúrguer */
+    /* Estilização do botão de hambúrguer no canto superior direito */
     .hamburger {
       cursor: pointer;
       display: flex;
@@ -49,6 +49,9 @@
       justify-content: space-between;
       width: 30px;
       height: 22px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
     }
 
     .hamburger div {
@@ -89,26 +92,20 @@
       left: 0;
     }
 
-    nav ul {
-      list-style: none;
-      display: flex;
+    /* Overlay (fundo escuro ao abrir o menu) */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
     }
 
-    nav ul li {
-      margin-left: 30px;
-    }
-
-    nav ul li a {
-      color: #e6e6e6;
-      text-transform: uppercase;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.3s;
-      cursor: pointer;
-    }
-
-    nav ul li a:hover {
-      color: #00ffff;
+    .overlay.show {
+      display: block;
     }
 
     /* Estilização da Seção Hero */
@@ -296,107 +293,6 @@
       font-size: 14px;
     }
 
-    /* Media Queries para dispositivos móveis */
-    @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .logo {
-        margin-bottom: 10px;
-        font-size: 24px;
-      }
-
-      nav ul {
-        flex-direction: column;
-      }
-
-      nav ul li {
-        margin-left: 0;
-        margin-top: 10px;
-      }
-
-      .hero h1 {
-        font-size: 40px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      section h2 {
-        font-size: 30px;
-      }
-
-      section p {
-        font-size: 16px;
-      }
-
-      .projects .project-item {
-        width: 100%;
-        margin: 10px 0;
-      }
-
-      .contact form input,
-      .contact form textarea {
-        font-size: 14px;
-      }
-
-      .contact form button {
-        padding: 12px;
-        font-size: 14px;
-      }
-
-      footer p {
-        font-size: 12px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 30px;
-      }
-
-      .hero p {
-        font-size: 14px;
-      }
-
-      section h2 {
-        font-size: 24px;
-      }
-
-      section p {
-        font-size: 14px;
-      }
-
-      .projects .project-item {
-        padding: 15px;
-      }
-
-      .projects .project-item h3 {
-        font-size: 20px;
-      }
-
-      .projects .project-item p {
-        font-size: 14px;
-      }
-
-      .projects .project-item img {
-        width: 80px;
-      }
-
-      .projects .project-item a {
-        padding: 8px 15px;
-        font-size: 14px;
-      }
-
-      footer p {
-        font-size: 10px;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -409,6 +305,9 @@
     <div></div>
   </div>
 </header>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
 
 <!-- Menu lateral -->
 <div class="side-menu" id="sideMenu">
@@ -455,27 +354,25 @@
   <p>&copy; 2024 - CoreDev. Todos os direitos reservados.</p>
 </footer>
 
-<!-- Script JavaScript para navegação suave e login/logout -->
+<!-- Script JavaScript para navegação suave, abrir/fechar menu e overlay -->
 <script>
-  const loginButton = document.getElementById('loginButton');
   const hamburger = document.getElementById('hamburger');
   const sideMenu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('overlay');
 
-  // Abrir/Fechar menu lateral
+  // Abrir menu e mostrar overlay
   hamburger.addEventListener('click', () => {
     sideMenu.classList.toggle('open');
+    overlay.classList.toggle('show');
   });
 
-  if (localStorage.getItem('loggedIn') === 'true') {
-    loginButton.textContent = 'Sair';
-    loginButton.href = '#';
-    loginButton.onclick = function() {
-      localStorage.removeItem('loggedIn');
-      window.location.reload();
-    };
-  }
+  // Fechar menu ao clicar fora (overlay)
+  overlay.addEventListener('click', () => {
+    sideMenu.classList.remove('open');
+    overlay.classList.remove('show');
+  });
 
-  // Navegação suave
+  // Suave navegação
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
