@@ -65,7 +65,7 @@
       color: #00ffff;
     }
 
-    /* Mostrar menu superior somente em computadores */
+    /* Esconder menu superior em dispositivos móveis */
     @media (max-width: 768px) {
       nav {
         display: none;
@@ -99,13 +99,13 @@
       }
     }
 
-    /* Menu lateral visível em todos os dispositivos */
+    /* Menu lateral otimizado para todos os dispositivos */
     .side-menu {
       height: 100vh;
       width: 250px;
       position: fixed;
       top: 0;
-      right: -250px;
+      left: -250px;
       background-color: #111;
       padding-top: 60px;
       transition: 0.3s;
@@ -132,9 +132,9 @@
       background-color: #575757;
     }
 
-    /* Animação para abrir o menu do lado direito */
+    /* Animação para abrir o menu do lado esquerdo */
     .side-menu.open {
-      right: 0;
+      left: 0;
     }
 
     /* Overlay (fundo escuro ao abrir o menu) */
@@ -355,7 +355,7 @@
     </ul>
   </nav>
 
-  <!-- Botão de hambúrguer (somente em dispositivos móveis) -->
+  <!-- Botão de hambúrguer (dispositivos móveis) -->
   <div class="hamburger" id="hamburger">
     <div></div>
     <div></div>
