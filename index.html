@@ -20,7 +20,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Estilização do Header */
+    /* Estilização do Header para Desktop */
     header {
       display: flex;
       justify-content: space-between;
@@ -41,10 +41,40 @@
       letter-spacing: 2px;
     }
 
-    /* Estilização do botão de hambúrguer no canto superior direito */
+    /* Menu de navegação superior (somente para desktop) */
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+    }
+
+    nav ul li a {
+      color: #e6e6e6;
+      text-transform: uppercase;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    nav ul li a:hover {
+      color: #00ffff;
+    }
+
+    /* Esconder o menu de navegação superior em dispositivos móveis */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+    }
+
+    /* Estilização do botão de hambúrguer no canto superior direito (somente em dispositivos móveis) */
     .hamburger {
       cursor: pointer;
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: space-between;
       width: 30px;
@@ -61,7 +91,14 @@
       border-radius: 5px;
     }
 
-    /* Menu lateral (lado direito) */
+    /* Mostrar o botão de hambúrguer em dispositivos móveis */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Menu lateral (somente para dispositivos móveis) */
     .side-menu {
       height: 100vh;
       width: 250px;
@@ -72,6 +109,7 @@
       padding-top: 60px;
       transition: 0.3s;
       z-index: 1000;
+      display: none;
     }
 
     .side-menu a {
@@ -79,12 +117,24 @@
       text-decoration: none;
       font-size: 18px;
       color: #e6e6e6;
-      display: block;
+      display: flex;
+      align-items: center;
       transition: 0.3s;
+    }
+
+    .side-menu a i {
+      margin-right: 10px;
     }
 
     .side-menu a:hover {
       background-color: #575757;
+    }
+
+    /* Mostrar o menu lateral em dispositivos móveis */
+    @media (max-width: 768px) {
+      .side-menu {
+        display: block;
+      }
     }
 
     /* Animação para abrir o menu do lado direito */
@@ -299,6 +349,18 @@
 
 <header>
   <div class="logo">CoreDev</div>
+  
+  <!-- Menu convencional para desktop -->
+  <nav>
+    <ul>
+      <li><a href="#about">Sobre Mim</a></li>
+      <li><a href="#projects">Projetos</a></li>
+      <li><a href="#contact">Contato</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Botão de hambúrguer (somente em dispositivos móveis) -->
   <div class="hamburger" id="hamburger">
     <div></div>
     <div></div>
@@ -306,15 +368,15 @@
   </div>
 </header>
 
-<!-- Overlay -->
+<!-- Overlay (fundo escuro) -->
 <div class="overlay" id="overlay"></div>
 
-<!-- Menu lateral (lado direito) -->
+<!-- Menu lateral (somente para dispositivos móveis) -->
 <div class="side-menu" id="sideMenu">
-  <a href="#about">Sobre Mim</a>
-  <a href="#projects">Projetos</a>
-  <a href="#contact">Contato</a>
-  <a href="login.html">Login</a>
+  <a href="#about"><i class="fas fa-user"></i>Sobre Mim</a>
+  <a href="#projects"><i class="fas fa-briefcase"></i>Projetos</a>
+  <a href="#contact"><i class="fas fa-envelope"></i>Contato</a>
+  <a href="login.html"><i class="fas fa-sign-in-alt"></i>Login</a>
 </div>
 
 <section class="hero">
@@ -383,6 +445,9 @@
     });
   });
 </script>
+
+<!-- Importar Font Awesome para os ícones -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
