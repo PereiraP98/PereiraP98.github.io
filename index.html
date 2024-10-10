@@ -21,7 +21,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Estilização do Header para Desktop */
+    /* Estilização do Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -42,7 +42,7 @@
       letter-spacing: 2px;
     }
 
-    /* Menu de navegação superior (somente para desktop) */
+    /* Menu de navegação superior para computadores */
     nav ul {
       list-style: none;
       display: flex;
@@ -65,14 +65,14 @@
       color: #00ffff;
     }
 
-    /* Esconder o menu de navegação superior em dispositivos móveis */
+    /* Mostrar menu superior somente em computadores */
     @media (max-width: 768px) {
       nav {
         display: none;
       }
     }
 
-    /* Estilização do botão de hambúrguer no canto superior direito (somente em dispositivos móveis) */
+    /* Estilização do botão de hambúrguer no canto superior direito */
     .hamburger {
       cursor: pointer;
       display: none;
@@ -92,14 +92,14 @@
       border-radius: 5px;
     }
 
-    /* Mostrar o botão de hambúrguer em dispositivos móveis */
+    /* Mostrar botão de hambúrguer em dispositivos móveis */
     @media (max-width: 768px) {
       .hamburger {
         display: flex;
       }
     }
 
-    /* Menu lateral (somente para dispositivos móveis) */
+    /* Menu lateral visível em todos os dispositivos */
     .side-menu {
       height: 100vh;
       width: 250px;
@@ -110,7 +110,6 @@
       padding-top: 60px;
       transition: 0.3s;
       z-index: 1000;
-      display: none;
     }
 
     .side-menu a {
@@ -131,13 +130,6 @@
 
     .side-menu a:hover {
       background-color: #575757;
-    }
-
-    /* Mostrar o menu lateral em dispositivos móveis */
-    @media (max-width: 768px) {
-      .side-menu {
-        display: block;
-      }
     }
 
     /* Animação para abrir o menu do lado direito */
@@ -353,7 +345,7 @@
 <header>
   <div class="logo">CoreDev</div>
   
-  <!-- Menu convencional para desktop -->
+  <!-- Menu superior convencional para computadores -->
   <nav>
     <ul>
       <li><a href="#about">Sobre Mim</a></li>
@@ -374,7 +366,7 @@
 <!-- Overlay (fundo escuro) -->
 <div class="overlay" id="overlay"></div>
 
-<!-- Menu lateral (somente para dispositivos móveis) -->
+<!-- Menu lateral disponível em todos os dispositivos -->
 <div class="side-menu" id="sideMenu">
   <a href="#about">
     <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Ícone de usuário">
