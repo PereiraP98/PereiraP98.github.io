@@ -75,7 +75,7 @@
       color: #00ffff;
     }
 
-    /* Janela flutuante de login com animação */
+    /* Janela flutuante de login com animação suave */
     .login-modal {
       display: none;
       position: fixed;
@@ -89,12 +89,14 @@
       z-index: 1001;
       text-align: center;
       width: 300px;
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .login-modal.show {
       display: block;
       transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
     }
 
     .login-modal input {
@@ -104,6 +106,24 @@
       border-radius: 5px;
       border: none;
       font-size: 16px;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .password-container input {
+      padding-right: 40px;
+    }
+
+    .password-container img {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
     }
 
     .login-modal button {
@@ -353,7 +373,12 @@
 <div class="login-modal" id="loginModal">
   <h2>Login</h2>
   <input type="text" id="username" placeholder="Usuário">
-  <input type="password" id="password" placeholder="Senha">
+  
+  <div class="password-container">
+    <input type="password" id="password" placeholder="Senha">
+    <img id="togglePassword" src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="Exibir senha">
+  </div>
+
   <button onclick="login()">Entrar</button>
   <p id="message" class="error-message"></p>
 </div>
@@ -396,6 +421,8 @@
   const loginBtn = document.getElementById('loginBtn');
   const loginIcon = document.getElementById('loginIcon');
   const loginModal = document.getElementById('loginModal');
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordField = document.getElementById('password');
   const messageElement = document.getElementById('message');
 
   const correctPasswordHash = 'bc4f43c2eb15f99aebf304c5faea7748d720e85b6b9c93c3c84d8b4e6888c634';
@@ -479,6 +506,13 @@
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
   }
+
+  // Alternar exibição da senha
+  togglePassword.addEventListener('click', () => {
+    const passwordVisible = passwordField.type === 'password';
+    passwordField.type = passwordVisible ? 'text' : 'password';
+    togglePassword.src = passwordVisible ? "https://cdn-icons-png.flaticon.com/512/7042/7042918.png" : "https://cdn-icons-png.flaticon.com/512/159/159604.png";
+  });
 
   window.onload = function() {
     const loggedIn = localStorage.getItem('loggedIn') === 'true';
