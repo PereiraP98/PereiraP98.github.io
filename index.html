@@ -75,78 +75,6 @@
       color: #00ffff;
     }
 
-    /* Janela flutuante de login com animação */
-    .login-modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background-color: #111;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-      z-index: 1001;
-      text-align: center;
-      width: 300px;
-      transition: transform 0.3s ease;
-    }
-
-    .login-modal.show {
-      display: block;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .login-modal input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: none;
-      font-size: 16px;
-    }
-
-    .login-modal button {
-      width: 100%;
-      padding: 10px;
-      background-color: #00ffff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #1e1e1e;
-    }
-
-    .login-modal button:hover {
-      background-color: #009999;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-    }
-
-    .overlay.show {
-      display: block;
-    }
-
-    .error-message {
-      color: red;
-      margin-top: 10px;
-    }
-
-    .success-message {
-      color: green;
-      margin-top: 10px;
-    }
-
     /* Mostrar menu superior em computadores e esconder em dispositivos móveis */
     @media (max-width: 768px) {
       nav {
@@ -309,6 +237,105 @@
       margin: 0 auto;
     }
 
+    /* Seção Sobre Mim */
+    .about {
+      background-color: #111;
+    }
+
+    /* Projetos */
+    .projects {
+      background-color: #1e1e1e;
+    }
+
+    .projects .project-list {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .projects .project-item {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px;
+      transition: transform 0.3s ease;
+      width: 300px;
+      text-align: center;
+    }
+
+    .projects .project-item:hover {
+      transform: scale(1.05);
+    }
+
+    .projects .project-item img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .projects .project-item h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #00ffff;
+    }
+
+    .projects .project-item p {
+      font-size: 16px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .projects .project-item a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00ffff;
+      color: #1e1e1e;
+      text-transform: uppercase;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .projects .project-item a:hover {
+      background-color: #009999;
+    }
+
+    /* Seção Contato */
+    .contact {
+      background-color: #111;
+    }
+
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact form input,
+    .contact form textarea {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .contact form button {
+      padding: 15px;
+      background-color: #00ffff;
+      color: #1e1e1e;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact form button:hover {
+      background-color: #009999;
+    }
+
     /* Rodapé */
     footer {
       background-color: #111;
@@ -334,7 +361,7 @@
       <li><a href="#about"><img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">Sobre Mim</a></li>
       <li><a href="#projects"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">Projetos</a></li>
       <li><a href="#contact"><img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">Contato</a></li>
-      <li><a href="#" id="loginBtn"><img id="loginIcon" src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a></li>
+      <li><a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a></li>
     </ul>
   </nav>
 
@@ -348,15 +375,6 @@
 
 <!-- Overlay (fundo escuro) -->
 <div class="overlay" id="overlay"></div>
-
-<!-- Janela de login flutuante -->
-<div class="login-modal" id="loginModal">
-  <h2>Login</h2>
-  <input type="text" id="username" placeholder="Usuário">
-  <input type="password" id="password" placeholder="Senha">
-  <button onclick="login()">Entrar</button>
-  <p id="message" class="error-message"></p>
-</div>
 
 <!-- Menu lateral para dispositivos móveis -->
 <div class="side-menu" id="sideMenu">
@@ -384,21 +402,42 @@
   <a href="#projects">Ver Projetos</a>
 </section>
 
+<section id="about" class="about">
+  <h2>Sobre Mim</h2>
+  <p>Sou um desenvolvedor apaixonado por tecnologia e inovação, focado em criar soluções inteligentes que impulsionam o futuro.</p>
+</section>
+
+<section id="projects" class="projects">
+  <h2>Projetos</h2>
+  <div class="project-list">
+    <div class="project-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Ícone Excel" style="width: 100px; margin-bottom: 20px;">
+      <h3>Projeto Excel - Gestão de Materiais</h3>
+      <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
+      <a href="projeto1.html">Ver Projeto</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contato</h2>
+  <form>
+    <input type="text" placeholder="Seu Nome" required>
+    <input type="email" placeholder="Seu Email" required>
+    <textarea rows="5" placeholder="Sua Mensagem"></textarea>
+    <button type="submit">Enviar Mensagem</button>
+  </form>
+</section>
+
 <footer>
   <p>&copy; 2024 - CoreDev. Todos os direitos reservados.</p>
 </footer>
 
-<!-- Script JavaScript para navegação suave, login, animação e overlay -->
+<!-- Script JavaScript para navegação suave, abrir/fechar menu e overlay -->
 <script>
   const hamburger = document.getElementById('hamburger');
   const sideMenu = document.getElementById('sideMenu');
   const overlay = document.getElementById('overlay');
-  const loginBtn = document.getElementById('loginBtn');
-  const loginIcon = document.getElementById('loginIcon');
-  const loginModal = document.getElementById('loginModal');
-  const messageElement = document.getElementById('message');
-
-  const correctPasswordHash = 'bc4f43c2eb15f99aebf304c5faea7748d720e85b6b9c93c3c84d8b4e6888c634';
 
   // Abrir menu e mostrar overlay
   hamburger.addEventListener('click', () => {
@@ -410,80 +449,18 @@
   overlay.addEventListener('click', () => {
     sideMenu.classList.remove('open');
     overlay.classList.remove('show');
-    loginModal.classList.remove('show');
   });
 
-  // Exibir janela de login com animação suave
-  loginBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (localStorage.getItem('loggedIn') === 'true') {
-      logout();
-    } else {
-      loginModal.classList.add('show');
-      overlay.classList.add('show');
-      document.getElementById('username').focus();
-    }
-  });
-
-  // Função de login ao pressionar "Enter"
-  document.getElementById('loginModal').addEventListener('keyup', function(event) {
-    if (event.key === "Enter") {
-      login();
-    }
-  });
-
-  // Função de login
-  function sha256(str) {
-    const buffer = new TextEncoder().encode(str);
-    return crypto.subtle.digest('SHA-256', buffer).then(function (hash) {
-      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  // Suave navegação
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({
+        behavior: 'smooth'
+      });
     });
-  }
-
-  function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username !== 'admin') {
-      messageElement.textContent = 'Usuário ou senha inválidos!';
-      return;
-    }
-
-    sha256(password).then(hash => {
-      if (hash === correctPasswordHash) {
-        localStorage.setItem('loggedIn', 'true');
-        updateLoginState(true);
-        loginModal.classList.remove('show');
-        overlay.classList.remove('show');
-        clearFields();
-      } else {
-        messageElement.textContent = 'Usuário ou senha inválidos!';
-      }
-    });
-  }
-
-  function updateLoginState(loggedIn) {
-    if (loggedIn) {
-      loginBtn.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/1828/1828466.png" alt="Ícone de Logout">Sair';
-    } else {
-      loginBtn.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login';
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem('loggedIn');
-    updateLoginState(false);
-  }
-
-  function clearFields() {
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
-  }
-
-  window.onload = function() {
-    const loggedIn = localStorage.getItem('loggedIn') === 'true';
-    updateLoginState(loggedIn);
-  };
+  });
 </script>
 
 </body>
