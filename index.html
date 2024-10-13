@@ -50,6 +50,8 @@
 
     nav ul li {
       margin-left: 30px;
+      display: flex;
+      align-items: center;
     }
 
     nav ul li a {
@@ -59,6 +61,14 @@
       text-decoration: none;
       transition: color 0.3s;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li a img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
     }
 
     nav ul li a:hover {
@@ -99,7 +109,7 @@
       }
     }
 
-    /* Menu lateral para todos os dispositivos */
+    /* Menu lateral para dispositivos móveis */
     .side-menu {
       height: 100vh;
       width: 250px;
@@ -132,7 +142,7 @@
       background-color: #575757;
     }
 
-    /* Animação para abrir o menu do lado esquerdo */
+    /* Animação para abrir o menu lateral */
     .side-menu.open {
       left: 0;
     }
@@ -348,10 +358,10 @@
   <!-- Menu superior convencional para computadores -->
   <nav>
     <ul>
-      <li><a href="#about">Sobre Mim</a></li>
-      <li><a href="#projects">Projetos</a></li>
-      <li><a href="#contact">Contato</a></li>
-      <li><a href="login.html">Login</a></li>
+      <li><a href="#about"><img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">Sobre Mim</a></li>
+      <li><a href="#projects"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">Projetos</a></li>
+      <li><a href="#contact"><img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">Contato</a></li>
+      <li><a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a></li>
     </ul>
   </nav>
 
@@ -366,14 +376,14 @@
 <!-- Overlay (fundo escuro) -->
 <div class="overlay" id="overlay"></div>
 
-<!-- Menu lateral para todos os dispositivos -->
+<!-- Menu lateral para dispositivos móveis -->
 <div class="side-menu" id="sideMenu">
   <a href="#about">
     <img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">
     Sobre Mim
   </a>
   <a href="#projects">
-    <img src="https://w7.pngwing.com/pngs/65/915/png-transparent-project-planning-management-computer-icons-business-text-people-plan-thumbnail.png" alt="Ícone de Projetos">
+    <img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">
     Projetos
   </a>
   <a href="#contact">
@@ -381,7 +391,7 @@
     Contato
   </a>
   <a href="login.html">
-    <img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login (Entrar)">
+    <img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">
     Login
   </a>
 </div>
