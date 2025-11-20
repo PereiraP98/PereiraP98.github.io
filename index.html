@@ -1,605 +1,365 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoreDev - Inovação e Tecnologia</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #1e1e1e;
-      color: #e6e6e6;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
-
-    /* Estilização do Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: #111;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    }
-
-    .logo {
-      color: #00ffff;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    /* Menu de navegação superior para computadores */
-    nav ul {
-      list-style: none;
-      display: flex;
-    }
-
-    nav ul li {
-      margin-left: 30px;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a {
-      color: #e6e6e6;
-      text-transform: uppercase;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.3s;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a img {
-      margin-right: 10px;
-      width: 20px;
-      height: 20px;
-    }
-
-    nav ul li a:hover {
-      color: #00ffff;
-    }
-
-    /* Mostrar menu superior em computadores e esconder em dispositivos móveis */
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-    }
-
-    /* Estilização do botão de hambúrguer no canto superior direito */
-    .hamburger {
-      cursor: pointer;
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      position: absolute;
-      right: 20px;
-      top: 20px;
-    }
-
-    .hamburger div {
-      width: 100%;
-      height: 4px;
-      background-color: #fff;
-      border-radius: 5px;
-    }
-
-    /* Mostrar botão de hambúrguer em dispositivos móveis */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* Menu lateral para dispositivos móveis */
-    .side-menu {
-      height: 100vh;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: -250px;
-      background-color: #111;
-      padding-top: 60px;
-      transition: 0.3s;
-      z-index: 1000;
-    }
-
-    .side-menu a {
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #e6e6e6;
-      display: flex;
-      align-items: center;
-      transition: 0.3s;
-    }
-
-    .side-menu a img {
-      margin-right: 10px;
-      width: 24px;
-      height: 24px;
-    }
-
-    .side-menu a:hover {
-      background-color: #575757;
-    }
-
-    /* Animação para abrir o menu lateral */
-    .side-menu.open {
-      left: 0;
-    }
-
-    /* Overlay (fundo escuro ao abrir o menu) */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    .overlay.show {
-      display: block;
-    }
-
-    /* Janela de login flutuante */
-    .login-modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #111;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      z-index: 1001;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .login-modal.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .login-modal h2 {
-      color: #00ffff;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .login-modal input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: #fff;
-    }
-
-    .login-modal button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #00ffff;
-      color: #111;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .login-modal button:hover {
-      background-color: #009999;
-    }
-
-    .password-container {
-      position: relative;
-    }
-
-    .password-container img {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    .error-message {
-      color: #ff4d4d;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    /* Estilização da Seção Hero */
-    .hero {
-      height: 100vh;
-      background: url('https://www.linkparaimagem.com/suaimagem.jpg') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      font-size: 60px;
-      color: #00ffff;
-      text-transform: uppercase;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin: 20px 0;
-      color: #ccc;
-      max-width: 600px;
-      line-height: 1.5;
-    }
-
-    .hero a {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-radius: 25px;
-      transition: background-color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .hero a:hover {
-      background-color: #009999;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Seções */
-    section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 40px;
-      margin-bottom: 20px;
-      color: #00ffff;
-    }
-
-    section p {
-      font-size: 18px;
-      color: #ccc;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* Seção Sobre Mim */
-    .about {
-      background-color: #111;
-    }
-
-    /* Projetos */
-    .projects {
-      background-color: #1e1e1e;
-    }
-
-    .projects .project-list {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .projects .project-item {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px;
-      transition: transform 0.3s ease;
-      width: 300px;
-      text-align: center;
-    }
-
-    .projects .project-item:hover {
-      transform: scale(1.05);
-    }
-
-    .projects .project-item img {
-      width: 100px;
-      margin-bottom: 20px;
-    }
-
-    .projects .project-item h3 {
-      font-size: 24px;
-      margin-bottom: 15px;
-      color: #00ffff;
-    }
-
-    .projects .project-item p {
-      font-size: 16px;
-      color: #ccc;
-      margin-bottom: 20px;
-    }
-
-    .projects .project-item a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      text-transform: uppercase;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .projects .project-item a:hover {
-      background-color: #009999;
-    }
-
-    /* Seção Contato */
-    .contact {
-      background-color: #111;
-    }
-
-    .contact form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .contact form input,
-    .contact form textarea {
-      margin-bottom: 20px;
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .contact form button {
-      padding: 15px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      font-weight: bold;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact form button:hover {
-      background-color: #009999;
-    }
-
-    /* Rodapé */
-    footer {
-      background-color: #111;
-      padding: 20px;
-      text-align: center;
-      color: #ccc;
-    }
-
-    footer p {
-      font-size: 14px;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumio Order - Sistema de Gestão para Restaurantes</title>
+    <link rel="icon" type="image/png" href="pictures/promio_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="pictures/LumioOrder_logo.png" alt="Lumio Order Logo">
+                <span>Lumio Order</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#vantagens">Vantagens</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="login/" class="btn-login">Acessar Sistema</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-icon" id="mobileMenuIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
 
-<header>
-  <div class="logo">CoreDev</div>
-  
-  <!-- Menu superior convencional para computadores -->
-  <nav>
-    <ul>
-      <li><a href="#about"><img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">Sobre Mim</a></li>
-      <li><a href="#projects"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">Projetos</a></li>
-      <li><a href="#contact"><img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">Contato</a></li>
-      <li><a href="javascript:void(0)" id="loginButton"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a></li>
-    </ul>
-  </nav>
-
-  <!-- Botão de hambúrguer (dispositivos móveis) -->
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</header>
-
-<!-- Overlay (fundo escuro) -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Menu lateral para dispositivos móveis -->
-<div class="side-menu" id="sideMenu">
-  <a href="#about">
-    <img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">
-    Sobre Mim
-  </a>
-  <a href="#projects">
-    <img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">
-    Projetos
-  </a>
-  <a href="#contact">
-    <img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">
-    Contato
-  </a>
-  <a href="javascript:void(0)" id="sideLogin"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a>
-</div>
-
-<section class="hero">
-  <h1>Bem-vindo ao CoreDev</h1>
-  <p>Inovação e tecnologia para transformar suas ideias em realidade.</p>
-  <a href="#projects">Ver Projetos</a>
-</section>
-
-<section id="about" class="about">
-  <h2>Sobre Mim</h2>
-  <p>Sou um desenvolvedor apaixonado por tecnologia e inovação, focado em criar soluções inteligentes que impulsionam o futuro.</p>
-</section>
-
-<section id="projects" class="projects">
-  <h2>Projetos</h2>
-  <div class="project-list">
-    <div class="project-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Ícone Excel" style="width: 100px; margin-bottom: 20px;">
-      <h3>Projeto Excel - Gestão de Materiais</h3>
-      <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
-      <a href="projeto1.html">Ver Projeto</a>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-close" id="mobileMenuClose">&times;</div>
+        <ul>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#vantagens">Vantagens</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="login/" class="btn-login-mobile">Acessar Sistema</a></li>
+        </ul>
     </div>
-  </div>
-</section>
 
-<section id="contact" class="contact">
-  <h2>Contato</h2>
-  <form>
-    <input type="text" placeholder="Seu Nome" required>
-    <input type="email" placeholder="Seu Email" required>
-    <textarea rows="5" placeholder="Sua Mensagem"></textarea>
-    <button type="submit">Enviar Mensagem</button>
-  </form>
-</section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforme a Gestão do seu Restaurante</h1>
+                <p class="hero-subtitle">Sistema completo de comandas, pedidos, estoque e controle financeiro em uma única plataforma SaaS profissional</p>
+                <div class="hero-buttons">
+                    <a href="login/" class="btn btn-primary">Começar Agora</a>
+                    <a href="#recursos" class="btn btn-secondary">Conhecer Recursos</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Restaurantes Atendidos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>98%</h3>
+                        <p>Satisfação</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Suporte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="pictures/LumioOrder_logo.png" alt="Sistema Lumio Order">
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <p>&copy; 2024 - CoreDev. Todos os direitos reservados.</p>
-</footer>
+    <!-- Recursos Section -->
+    <section id="recursos" class="recursos">
+        <div class="container">
+            <h2 class="section-title">Recursos Completos</h2>
+            <p class="section-subtitle">Tudo o que você precisa para gerenciar seu restaurante com eficiência</p>
+            
+            <div class="recursos-grid">
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/mesas.png" alt="Gestão de Mesas">
+                    </div>
+                    <h3>Gestão de Mesas</h3>
+                    <p>Controle completo de mesas, reservas, transferências e agrupamentos em tempo real</p>
+                </div>
 
-<!-- Janela de Login -->
-<div class="login-modal" id="loginModal">
-  <h2>Login</h2>
-  <input type="text" id="username" placeholder="Usuário">
-  <div class="password-container">
-    <input type="password" id="password" placeholder="Senha">
-    <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="Exibir Senha" id="togglePassword">
-  </div>
-  <button id="loginSubmit">Entrar</button>
-  <div class="error-message" id="errorMessage"></div>
-</div>
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/comandas.png" alt="Comandas">
+                    </div>
+                    <h3>Comandas Digitais</h3>
+                    <p>Sistema de comandas eletrônicas com controle total de pedidos e consumo</p>
+                </div>
 
-<!-- Script JavaScript para navegação suave, login/logout, abrir/fechar menu e overlay -->
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const sideMenu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('overlay');
-  const loginModal = document.getElementById('loginModal');
-  const loginButton = document.getElementById('loginButton');
-  const sideLogin = document.getElementById('sideLogin');
-  const togglePassword = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('password');
-  const loginSubmit = document.getElementById('loginSubmit');
-  const errorMessage = document.getElementById('errorMessage');
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/estoque.png" alt="Estoque">
+                    </div>
+                    <h3>Controle de Estoque</h3>
+                    <p>Gestão inteligente de estoque com alertas de reposição e histórico completo</p>
+                </div>
 
-  // Abrir menu e mostrar overlay
-  hamburger.addEventListener('click', () => {
-    sideMenu.classList.toggle('open');
-    overlay.classList.toggle('show');
-  });
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/fecharcaixa.png" alt="Caixa">
+                    </div>
+                    <h3>Controle de Caixa</h3>
+                    <p>Abertura, fechamento de caixa, sangria e controle financeiro completo</p>
+                </div>
 
-  // Fechar menu ao clicar fora (overlay)
-  overlay.addEventListener('click', () => {
-    sideMenu.classList.remove('open');
-    overlay.classList.remove('show');
-  });
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/delivery.png" alt="Delivery">
+                    </div>
+                    <h3>Sistema Delivery</h3>
+                    <p>Gestão completa de pedidos delivery com rastreamento e controle</p>
+                </div>
 
-  // Suave navegação
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      target.scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/relatorios.png" alt="Relatórios">
+                    </div>
+                    <h3>Relatórios Gerenciais</h3>
+                    <p>Dashboards e relatórios completos para tomada de decisões estratégicas</p>
+                </div>
 
-  // Exibir login modal
-  function showLoginModal() {
-    loginModal.classList.add('show');
-    overlay.classList.add('show');
-  }
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/usuarios.png" alt="Usuários">
+                    </div>
+                    <h3>Gestão de Usuários</h3>
+                    <p>Controle de permissões e perfis de acesso para sua equipe</p>
+                </div>
 
-  loginButton.addEventListener('click', showLoginModal);
-  sideLogin.addEventListener('click', showLoginModal);
+                <div class="recurso-card">
+                    <div class="recurso-icon">
+                        <img src="pictures/notificacoes.png" alt="Notificações">
+                    </div>
+                    <h3>Notificações em Tempo Real</h3>
+                    <p>Alertas instantâneos para novos pedidos e eventos importantes</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // Fechar modal ao clicar no overlay
-  overlay.addEventListener('click', () => {
-    loginModal.classList.remove('show');
-    overlay.classList.remove('show');
-  });
+    <!-- Vantagens Section -->
+    <section id="vantagens" class="vantagens">
+        <div class="container">
+            <h2 class="section-title">Por Que Escolher Lumio Order?</h2>
+            
+            <div class="vantagens-grid">
+                <div class="vantagem-item">
+                    <div class="vantagem-number">01</div>
+                    <h3>Interface Intuitiva</h3>
+                    <p>Design moderno e fácil de usar. Sua equipe aprende em minutos!</p>
+                </div>
 
-  // Alternar visibilidade da senha
-  togglePassword.addEventListener('click', () => {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    togglePassword.src = type === 'password' 
-      ? 'https://cdn-icons-png.flaticon.com/512/159/159604.png' 
-      : 'https://cdn-icons-png.flaticon.com/512/7042/7042918.png';
-  });
+                <div class="vantagem-item">
+                    <div class="vantagem-number">02</div>
+                    <h3>100% Online</h3>
+                    <p>Acesse de qualquer lugar, a qualquer hora. Nuvem segura e confiável.</p>
+                </div>
 
-  // Simulação de login (básica)
-  loginSubmit.addEventListener('click', () => {
-    const username = document.getElementById('username').value;
-    const password = passwordInput.value;
+                <div class="vantagem-item">
+                    <div class="vantagem-number">03</div>
+                    <h3>Sem Instalação</h3>
+                    <p>Sistema SaaS pronto para usar. Sem custos com infraestrutura.</p>
+                </div>
 
-    if (username === 'admin' && password === 'AceSSo#@3038') {
-      errorMessage.textContent = 'Login bem-sucedido!';
-      loginModal.classList.remove('show');
-      overlay.classList.remove('show');
-      loginButton.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/1828/1828466.png" alt="Ícone de Logout">Sair';
-      sideLogin.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/1828/1828466.png" alt="Ícone de Logout">Sair';
-    } else {
-      errorMessage.textContent = 'Usuário ou senha inválidos!';
-    }
-  });
+                <div class="vantagem-item">
+                    <div class="vantagem-number">04</div>
+                    <h3>Suporte Dedicado</h3>
+                    <p>Equipe especializada disponível 24/7 para ajudar você.</p>
+                </div>
 
-  // Logout
-  loginButton.addEventListener('click', function() {
-    if (loginButton.textContent.includes('Sair')) {
-      loginButton.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login';
-      sideLogin.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login';
-    }
-  });
-</script>
+                <div class="vantagem-item">
+                    <div class="vantagem-number">05</div>
+                    <h3>Atualizações Constantes</h3>
+                    <p>Novos recursos adicionados regularmente sem custo adicional.</p>
+                </div>
 
+                <div class="vantagem-item">
+                    <div class="vantagem-number">06</div>
+                    <h3>Segurança Garantida</h3>
+                    <p>Criptografia de ponta e backup automático dos seus dados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos Section -->
+    <section id="planos" class="planos">
+        <div class="container">
+            <h2 class="section-title">Planos e Preços</h2>
+            <p class="section-subtitle">Escolha o plano ideal para o seu negócio</p>
+            
+            <div class="planos-grid">
+                <div class="plano-card">
+                    <h3 class="plano-nome">Básico</h3>
+                    <div class="plano-preco">
+                        <span class="moeda">R$</span>
+                        <span class="valor">99</span>
+                        <span class="periodo">/mês</span>
+                    </div>
+                    <ul class="plano-recursos">
+                        <li>✓ Até 10 Mesas</li>
+                        <li>✓ 2 Usuários</li>
+                        <li>✓ Comandas Digitais</li>
+                        <li>✓ Controle de Caixa</li>
+                        <li>✓ Relatórios Básicos</li>
+                        <li>✓ Suporte por Email</li>
+                    </ul>
+                    <a href="login/" class="btn btn-plano">Começar Agora</a>
+                </div>
+
+                <div class="plano-card plano-destaque">
+                    <div class="plano-badge">Mais Popular</div>
+                    <h3 class="plano-nome">Profissional</h3>
+                    <div class="plano-preco">
+                        <span class="moeda">R$</span>
+                        <span class="valor">199</span>
+                        <span class="periodo">/mês</span>
+                    </div>
+                    <ul class="plano-recursos">
+                        <li>✓ Até 30 Mesas</li>
+                        <li>✓ 5 Usuários</li>
+                        <li>✓ Todos os Recursos Básicos</li>
+                        <li>✓ Sistema Delivery</li>
+                        <li>✓ Controle de Estoque</li>
+                        <li>✓ Relatórios Avançados</li>
+                        <li>✓ Suporte Prioritário 24/7</li>
+                    </ul>
+                    <a href="login/" class="btn btn-plano">Começar Agora</a>
+                </div>
+
+                <div class="plano-card">
+                    <h3 class="plano-nome">Enterprise</h3>
+                    <div class="plano-preco">
+                        <span class="moeda">R$</span>
+                        <span class="valor">399</span>
+                        <span class="periodo">/mês</span>
+                    </div>
+                    <ul class="plano-recursos">
+                        <li>✓ Mesas Ilimitadas</li>
+                        <li>✓ Usuários Ilimitados</li>
+                        <li>✓ Todos os Recursos Pro</li>
+                        <li>✓ Multi-Unidades</li>
+                        <li>✓ API Personalizada</li>
+                        <li>✓ Treinamento Dedicado</li>
+                        <li>✓ Gerente de Conta Exclusivo</li>
+                    </ul>
+                    <a href="login/" class="btn btn-plano">Falar com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="section-subtitle">Tem dúvidas? Estamos aqui para ajudar!</p>
+            
+            <div class="contato-content">
+                <form class="contato-form" id="contatoForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Seu Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Seu Telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </form>
+
+                <div class="contato-info">
+                    <div class="info-item">
+                        <h4>📧 Email</h4>
+                        <p>contato@lumioorder.com.br</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>📱 Telefone</h4>
+                        <p>(11) 99999-9999</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🕐 Horário</h4>
+                        <p>Segunda a Sexta: 8h às 18h<br>Sábado: 9h às 13h</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💬 Suporte 24/7</h4>
+                        <p>Atendimento técnico disponível a qualquer hora</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="pictures/LumioOrder_logo.png" alt="Lumio Order">
+                        <span>Lumio Order</span>
+                    </div>
+                    <p>Sistema completo de gestão para restaurantes. Transforme seu negócio com tecnologia.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Produto</h4>
+                    <ul>
+                        <li><a href="#recursos">Recursos</a></li>
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">API</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Status do Sistema</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lumio Order. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

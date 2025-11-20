@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Lumio Order</title>
+    <link rel="icon" type="image/png" href="../pictures/promio_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="login-branding">
+                <img src="../pictures/LumioOrder_logo.png" alt="Lumio Order Logo" class="login-logo">
+                <h1>Lumio Order</h1>
+                <p class="tagline">Sistema Profissional de Gestão para Restaurantes</p>
+            </div>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>
+                        <h3>Gestão Completa</h3>
+                        <p>Controle total de mesas, comandas e pedidos</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>
+                        <h3>Controle Financeiro</h3>
+                        <p>Caixa, sangria e relatórios em tempo real</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>
+                        <h3>100% Online</h3>
+                        <p>Acesse de qualquer lugar, a qualquer hora</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-right">
+            <div class="login-box">
+                <div class="back-button">
+                    <a href="../">← Voltar</a>
+                </div>
+
+                <h2>Bem-vindo de Volta!</h2>
+                <p class="login-subtitle">Entre com suas credenciais para acessar o sistema</p>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email ou Usuário</label>
+                        <input type="text" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember">
+                            <span class="checkmark"></span>
+                            Lembrar-me
+                        </label>
+                        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Entrar no Sistema</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+
+                    <div class="alert alert-error" id="errorAlert" style="display: none;"></div>
+                    <div class="alert alert-success" id="successAlert" style="display: none;"></div>
+                </form>
+
+                <div class="login-divider">
+                    <span>ou</span>
+                </div>
+
+                <div class="signup-link">
+                    Não tem uma conta? <a href="#" id="signupLink">Solicitar Demonstração</a>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p>© 2024 Lumio Order. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Termos</a>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Demonstração -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Demonstração</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="demoForm">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nome do Restaurante</label>
+                        <input type="text" placeholder="Nome do seu restaurante" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Solicitar Demonstração</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

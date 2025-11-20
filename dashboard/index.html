@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lumio Order</title>
+    <link rel="icon" type="image/png" href="../pictures/promio_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="../pictures/LumioOrder_logo.png" alt="Lumio Order">
+                <span>Lumio Order</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active">
+                <img src="../pictures/relatorios.png" alt="Dashboard">
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/mesas.png" alt="Mesas">
+                <span>Mesas</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/comandas.png" alt="Comandas">
+                <span>Comandas</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/estoque.png" alt="Estoque">
+                <span>Estoque</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/fecharcaixa.png" alt="Caixa">
+                <span>Caixa</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/delivery.png" alt="Delivery">
+                <span>Delivery</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/usuarios.png" alt="Usuários">
+                <span>Usuários</span>
+            </a>
+            <a href="#" class="menu-item">
+                <img src="../pictures/configuracoes.png" alt="Configurações">
+                <span>Configurações</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="menu-item" id="logoutBtn">
+                <img src="../pictures/voltar.png" alt="Sair">
+                <span>Sair</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h1>Dashboard</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar...">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+                <button class="notification-btn">
+                    <img src="../pictures/notificacoes.png" alt="Notificações">
+                    <span class="badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <img src="../pictures/usuario.png" alt="Usuário" class="user-avatar">
+                    <div class="user-info">
+                        <span class="user-name" id="userName">Administrador</span>
+                        <span class="user-role" id="userRole">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <img src="../pictures/mesas.png" alt="Mesas">
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Mesas Ocupadas</p>
+                        <span class="stat-change positive">+3 hoje</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <img src="../pictures/comandas.png" alt="Comandas">
+                    </div>
+                    <div class="stat-info">
+                        <h3>28</h3>
+                        <p>Comandas Abertas</p>
+                        <span class="stat-change positive">+5 hoje</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <img src="../pictures/fecharcaixa.png" alt="Vendas">
+                    </div>
+                    <div class="stat-info">
+                        <h3>R$ 3.450</h3>
+                        <p>Vendas Hoje</p>
+                        <span class="stat-change positive">+12%</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <img src="../pictures/delivery.png" alt="Delivery">
+                    </div>
+                    <div class="stat-info">
+                        <h3>15</h3>
+                        <p>Pedidos Delivery</p>
+                        <span class="stat-change negative">-2 hoje</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Tables -->
+            <div class="dashboard-row">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Vendas dos Últimos 7 Dias</h2>
+                        <select class="filter-select">
+                            <option>7 dias</option>
+                            <option>30 dias</option>
+                            <option>90 dias</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-placeholder">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Mesas - Status</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mesa-status-grid">
+                            <div class="mesa-status livre">
+                                <span class="mesa-numero">1</span>
+                                <span class="mesa-label">Livre</span>
+                            </div>
+                            <div class="mesa-status ocupada">
+                                <span class="mesa-numero">2</span>
+                                <span class="mesa-label">Ocupada</span>
+                            </div>
+                            <div class="mesa-status ocupada">
+                                <span class="mesa-numero">3</span>
+                                <span class="mesa-label">Ocupada</span>
+                            </div>
+                            <div class="mesa-status livre">
+                                <span class="mesa-numero">4</span>
+                                <span class="mesa-label">Livre</span>
+                            </div>
+                            <div class="mesa-status reservada">
+                                <span class="mesa-numero">5</span>
+                                <span class="mesa-label">Reservada</span>
+                            </div>
+                            <div class="mesa-status ocupada">
+                                <span class="mesa-numero">6</span>
+                                <span class="mesa-label">Ocupada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Pedidos Recentes</h2>
+                    <button class="btn-primary">Ver Todos</button>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mesa</th>
+                                <th>Pedido</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Horário</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge-mesa">Mesa 2</span></td>
+                                <td>Filé à Parmegiana</td>
+                                <td><span class="status-badge preparando">Preparando</span></td>
+                                <td>R$ 58,00</td>
+                                <td>12:35</td>
+                                <td>
+                                    <button class="btn-action">Ver</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-mesa">Mesa 5</span></td>
+                                <td>Hambúrguer Artesanal</td>
+                                <td><span class="status-badge pronto">Pronto</span></td>
+                                <td>R$ 38,00</td>
+                                <td>12:28</td>
+                                <td>
+                                    <button class="btn-action">Ver</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-mesa">Mesa 3</span></td>
+                                <td>Feijoada Completa</td>
+                                <td><span class="status-badge pendente">Pendente</span></td>
+                                <td>R$ 45,00</td>
+                                <td>12:25</td>
+                                <td>
+                                    <button class="btn-action">Ver</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-mesa">Delivery</span></td>
+                                <td>2x Sanduíche Natural</td>
+                                <td><span class="status-badge entregue">Entregue</span></td>
+                                <td>R$ 36,00</td>
+                                <td>12:15</td>
+                                <td>
+                                    <button class="btn-action">Ver</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
