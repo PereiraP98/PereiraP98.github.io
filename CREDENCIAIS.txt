@@ -1,0 +1,174 @@
+╔══════════════════════════════════════════════════════════════════╗
+║              LUMIO ORDER - CREDENCIAIS DO SISTEMA                ║
+║                Sistema de Gestão para Restaurantes               ║
+╚══════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════
+🔑 USUÁRIOS DE TESTE
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│ ADMINISTRADOR                                                    │
+├─────────────────────────────────────────────────────────────────┤
+│ Email:    admin@lumio.com                                        │
+│ Senha:    admin123                                               │
+│ Tipo:     Administrador                                          │
+│ Acesso:   Total (todas as funcionalidades)                       │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ USUÁRIO DEMO                                                     │
+├─────────────────────────────────────────────────────────────────┤
+│ Email:    demo@lumio.com                                         │
+│ Senha:    demo123                                                │
+│ Tipo:     Gerente                                                │
+│ Acesso:   Completo (exceto configurações de sistema)            │
+└─────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════
+💾 BANCO DE DADOS (Configurar em: api/config/database.php)
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│ DESENVOLVIMENTO LOCAL (XAMPP/WAMP)                              │
+├─────────────────────────────────────────────────────────────────┤
+│ Host:         localhost                                          │
+│ Database:     lumio_order                                        │
+│ Username:     root                                               │
+│ Password:     (deixe vazio ou sua senha local)                   │
+│ Porta:        3306                                               │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ HOSTINGER (PRODUÇÃO) - EXEMPLO                                  │
+├─────────────────────────────────────────────────────────────────┤
+│ Host:         localhost                                          │
+│ Database:     u123456789_lumio                                   │
+│ Username:     u123456789_admin                                   │
+│ Password:     [SENHA_FORTE_AQUI]                                 │
+│ Porta:        3306                                               │
+└─────────────────────────────────────────────────────────────────┘
+
+⚠️  IMPORTANTE: Altere as credenciais em produção!
+    Nunca use credenciais padrão em ambiente de produção.
+
+═══════════════════════════════════════════════════════════════════
+📡 FTP/SFTP (Para upload na Hostinger)
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│ CREDENCIAIS FTP (Obter no hPanel da Hostinger)                  │
+├─────────────────────────────────────────────────────────────────┤
+│ Host:         ftp.seudominio.com                                 │
+│ Username:     seu_usuario@seudominio.com                         │
+│ Password:     [SUA_SENHA_FTP]                                    │
+│ Porta:        21 (FTP) ou 22 (SFTP)                             │
+│ Pasta:        public_html                                        │
+└─────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════
+🔐 SENHAS DOS USUÁRIOS NO BANCO (Hash bcrypt)
+═══════════════════════════════════════════════════════════════════
+
+admin123 → $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+demo123  → $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+
+📝 Nota: As senhas são armazenadas com hash bcrypt para segurança.
+         Para criar novas senhas use: password_hash('senha', PASSWORD_BCRYPT)
+
+═══════════════════════════════════════════════════════════════════
+🌐 URLs DE ACESSO
+═══════════════════════════════════════════════════════════════════
+
+DESENVOLVIMENTO LOCAL:
+├─ Landing Page:  http://localhost/lumio/landing.html
+├─ Login:         http://localhost/lumio/sistema-login.html
+└─ Dashboard:     http://localhost/lumio/dashboard.html
+
+PRODUÇÃO (HOSTINGER):
+├─ Landing Page:  https://seudominio.com/landing.html
+├─ Login:         https://seudominio.com/sistema-login.html
+└─ Dashboard:     https://seudominio.com/dashboard.html
+
+═══════════════════════════════════════════════════════════════════
+🛡️ SEGURANÇA - RECOMENDAÇÕES
+═══════════════════════════════════════════════════════════════════
+
+✓ Altere TODAS as senhas padrão em produção
+✓ Use senhas fortes (mínimo 12 caracteres)
+✓ Ative SSL/HTTPS na Hostinger
+✓ Configure backups automáticos
+✓ Proteja o arquivo database.php
+✓ Use .htaccess para proteger pastas sensíveis
+✓ Mantenha logs de acesso
+✓ Atualize regularmente o PHP e MySQL
+
+═══════════════════════════════════════════════════════════════════
+📋 CHECKLIST DE SEGURANÇA
+═══════════════════════════════════════════════════════════════════
+
+ANTES DE COLOCAR EM PRODUÇÃO:
+
+□ Alterar senha do usuário admin
+□ Alterar senha do banco de dados
+□ Ativar SSL/HTTPS
+□ Configurar firewall
+□ Desativar exibição de erros PHP
+□ Configurar backups automáticos
+□ Testar todos os formulários
+□ Validar conexão com banco de dados
+□ Testar login/logout
+□ Verificar permissões de arquivos (644/755)
+□ Remover arquivos de teste
+□ Configurar monitoramento
+
+═══════════════════════════════════════════════════════════════════
+🔄 COMO ALTERAR SENHAS
+═══════════════════════════════════════════════════════════════════
+
+1. CRIAR HASH DA NOVA SENHA (PHP):
+   
+   <?php
+   echo password_hash('sua_nova_senha', PASSWORD_BCRYPT);
+   ?>
+
+2. ATUALIZAR NO BANCO:
+   
+   UPDATE usuarios 
+   SET senha = '$2y$10$...[HASH_GERADO]...' 
+   WHERE email = 'admin@lumio.com';
+
+3. TESTAR LOGIN:
+   
+   Acesse sistema-login.html e teste a nova senha
+
+═══════════════════════════════════════════════════════════════════
+📞 SUPORTE E CONTATO
+═══════════════════════════════════════════════════════════════════
+
+Em caso de problemas com credenciais:
+
+📧 Email:     contato@lumioorder.com.br
+📱 Telefone:  (11) 99999-9999
+🕐 Horário:   Segunda a Sexta, 8h às 18h
+🌐 Site:      www.lumioorder.com.br (em desenvolvimento)
+
+═══════════════════════════════════════════════════════════════════
+⚠️  AVISOS IMPORTANTES
+═══════════════════════════════════════════════════════════════════
+
+1. NUNCA compartilhe suas credenciais de banco de dados
+2. NUNCA comite arquivos com senhas no Git/GitHub
+3. Use variáveis de ambiente para senhas em produção
+4. Mantenha backups regulares do banco de dados
+5. Monitore logs de acesso regularmente
+6. Altere senhas periodicamente
+7. Use autenticação de dois fatores quando disponível
+
+═══════════════════════════════════════════════════════════════════
+
+🔒 Mantenha este arquivo em local seguro e NUNCA o publique online!
+
+Copyright © 2024 Lumio Order. Todos os direitos reservados.
+
+═══════════════════════════════════════════════════════════════════
