@@ -1,605 +1,465 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoreDev - Inovação e Tecnologia</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #1e1e1e;
-      color: #e6e6e6;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
-
-    /* Estilização do Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: #111;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    }
-
-    .logo {
-      color: #00ffff;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    /* Menu de navegação superior para computadores */
-    nav ul {
-      list-style: none;
-      display: flex;
-    }
-
-    nav ul li {
-      margin-left: 30px;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a {
-      color: #e6e6e6;
-      text-transform: uppercase;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.3s;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a img {
-      margin-right: 10px;
-      width: 20px;
-      height: 20px;
-    }
-
-    nav ul li a:hover {
-      color: #00ffff;
-    }
-
-    /* Mostrar menu superior em computadores e esconder em dispositivos móveis */
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-    }
-
-    /* Estilização do botão de hambúrguer no canto superior direito */
-    .hamburger {
-      cursor: pointer;
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      position: absolute;
-      right: 20px;
-      top: 20px;
-    }
-
-    .hamburger div {
-      width: 100%;
-      height: 4px;
-      background-color: #fff;
-      border-radius: 5px;
-    }
-
-    /* Mostrar botão de hambúrguer em dispositivos móveis */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* Menu lateral para dispositivos móveis */
-    .side-menu {
-      height: 100vh;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: -250px;
-      background-color: #111;
-      padding-top: 60px;
-      transition: 0.3s;
-      z-index: 1000;
-    }
-
-    .side-menu a {
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #e6e6e6;
-      display: flex;
-      align-items: center;
-      transition: 0.3s;
-    }
-
-    .side-menu a img {
-      margin-right: 10px;
-      width: 24px;
-      height: 24px;
-    }
-
-    .side-menu a:hover {
-      background-color: #575757;
-    }
-
-    /* Animação para abrir o menu lateral */
-    .side-menu.open {
-      left: 0;
-    }
-
-    /* Overlay (fundo escuro ao abrir o menu) */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    .overlay.show {
-      display: block;
-    }
-
-    /* Janela de login flutuante */
-    .login-modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #111;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      z-index: 1001;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .login-modal.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .login-modal h2 {
-      color: #00ffff;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .login-modal input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: #fff;
-    }
-
-    .login-modal button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #00ffff;
-      color: #111;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .login-modal button:hover {
-      background-color: #009999;
-    }
-
-    .password-container {
-      position: relative;
-    }
-
-    .password-container img {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    .error-message {
-      color: #ff4d4d;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    /* Estilização da Seção Hero */
-    .hero {
-      height: 100vh;
-      background: url('https://www.linkparaimagem.com/suaimagem.jpg') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      font-size: 60px;
-      color: #00ffff;
-      text-transform: uppercase;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin: 20px 0;
-      color: #ccc;
-      max-width: 600px;
-      line-height: 1.5;
-    }
-
-    .hero a {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-radius: 25px;
-      transition: background-color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .hero a:hover {
-      background-color: #009999;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Seções */
-    section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 40px;
-      margin-bottom: 20px;
-      color: #00ffff;
-    }
-
-    section p {
-      font-size: 18px;
-      color: #ccc;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* Seção Sobre Mim */
-    .about {
-      background-color: #111;
-    }
-
-    /* Projetos */
-    .projects {
-      background-color: #1e1e1e;
-    }
-
-    .projects .project-list {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .projects .project-item {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px;
-      transition: transform 0.3s ease;
-      width: 300px;
-      text-align: center;
-    }
-
-    .projects .project-item:hover {
-      transform: scale(1.05);
-    }
-
-    .projects .project-item img {
-      width: 100px;
-      margin-bottom: 20px;
-    }
-
-    .projects .project-item h3 {
-      font-size: 24px;
-      margin-bottom: 15px;
-      color: #00ffff;
-    }
-
-    .projects .project-item p {
-      font-size: 16px;
-      color: #ccc;
-      margin-bottom: 20px;
-    }
-
-    .projects .project-item a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      text-transform: uppercase;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .projects .project-item a:hover {
-      background-color: #009999;
-    }
-
-    /* Seção Contato */
-    .contact {
-      background-color: #111;
-    }
-
-    .contact form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .contact form input,
-    .contact form textarea {
-      margin-bottom: 20px;
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .contact form button {
-      padding: 15px;
-      background-color: #00ffff;
-      color: #1e1e1e;
-      font-weight: bold;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact form button:hover {
-      background-color: #009999;
-    }
-
-    /* Rodapé */
-    footer {
-      background-color: #111;
-      padding: 20px;
-      text-align: center;
-      color: #ccc;
-    }
-
-    footer p {
-      font-size: 14px;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema SaaS de agendamento online para barbearias. Modernize seu negócio com nossa plataforma completa.">
+    <title>BarberPro - Sistema de Agendamento Online para Barbearias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-cut"></i>
+                    <span>BarberPro</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Início</a></li>
+                    <li><a href="#features" class="nav-link">Recursos</a></li>
+                    <li><a href="#how-it-works" class="nav-link">Como Funciona</a></li>
+                    <li><a href="#pricing" class="nav-link">Planos</a></li>
+                    <li><a href="#testimonials" class="nav-link">Depoimentos</a></li>
+                    <li><a href="login.html" class="btn-login">Entrar</a></li>
+                    <li><a href="#cta" class="btn-primary">Começar Grátis</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<header>
-  <div class="logo">CoreDev</div>
-  
-  <!-- Menu superior convencional para computadores -->
-  <nav>
-    <ul>
-      <li><a href="#about"><img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">Sobre Mim</a></li>
-      <li><a href="#projects"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">Projetos</a></li>
-      <li><a href="#contact"><img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">Contato</a></li>
-      <li><a href="javascript:void(0)" id="loginButton"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a></li>
-    </ul>
-  </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="badge">🚀 #1 em Agendamento Online</span>
+                    <h1 class="hero-title">
+                        Transforme sua Barbearia com 
+                        <span class="gradient-text">Tecnologia</span>
+                    </h1>
+                    <p class="hero-description">
+                        Sistema completo de agendamento online que revoluciona a gestão da sua barbearia. 
+                        Aumente seus lucros, reduza faltas e ofereça uma experiência premium aos seus clientes.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#cta" class="btn btn-primary btn-large">
+                            Começar Grátis
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#how-it-works" class="btn btn-secondary btn-large">
+                            <i class="fas fa-play-circle"></i>
+                            Ver Demonstração
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>10.000+</h3>
+                            <p>Barbearias</p>
+                        </div>
+                        <div class="stat">
+                            <h3>98%</h3>
+                            <p>Satisfação</p>
+                        </div>
+                        <div class="stat">
+                            <h3>50M+</h3>
+                            <p>Agendamentos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="mockup-wrapper">
+                        <div class="mockup-phone">
+                            <div class="mockup-screen">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                        </div>
+                        <div class="floating-card card-1">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Agendamento Confirmado</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <i class="fas fa-star"></i>
+                            <span>Avaliação 5 estrelas</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <i class="fas fa-chart-line"></i>
+                            <span>+35% Faturamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Botão de hambúrguer (dispositivos móveis) -->
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</header>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Recursos Poderosos</span>
+                <h2 class="section-title">Tudo que sua barbearia precisa em um só lugar</h2>
+                <p class="section-description">
+                    Ferramentas completas para gerenciar, crescer e profissionalizar seu negócio
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Agendamento Online 24/7</h3>
+                    <p>Seus clientes podem agendar a qualquer hora, de qualquer lugar. Sem ligações, sem espera.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Lembretes Automáticos</h3>
+                    <p>WhatsApp e SMS automáticos reduzem faltas em até 80%. Nunca mais perca dinheiro com ausências.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Gestão de Clientes</h3>
+                    <p>Histórico completo, preferências e aniversários. Crie relacionamentos duradouros.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Relatórios Inteligentes</h3>
+                    <p>Analise faturamento, horários de pico e desempenho. Tome decisões baseadas em dados.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Pagamento Online</h3>
+                    <p>Aceite pagamentos antecipados via PIX, cartão e carteiras digitais. Aumente sua receita.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>App Mobile</h3>
+                    <p>Gerencie sua barbearia de qualquer lugar. iOS e Android nativos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Sistema de Avaliações</h3>
+                    <p>Colete feedbacks e construa sua reputação online automaticamente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Agendamentos Ilimitados</h3>
+                    <p>Sem limites de agendamentos, profissionais ou serviços. Escale sem preocupações.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Overlay (fundo escuro) -->
-<div class="overlay" id="overlay"></div>
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Simples e Rápido</span>
+                <h2 class="section-title">Como Funciona</h2>
+                <p class="section-description">
+                    Em 3 passos simples, sua barbearia estará online
+                </p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Cadastre sua Barbearia</h3>
+                        <p>Crie sua conta em menos de 2 minutos. Adicione seus serviços, profissionais e horários de funcionamento.</p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Personalize e Configure</h3>
+                        <p>Ajuste cores, logo e preferências. Configure lembretes, políticas de cancelamento e formas de pagamento.</p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Comece a Receber Agendamentos</h3>
+                        <p>Compartilhe seu link de agendamento e veja sua agenda encher. Fácil assim!</p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Menu lateral para dispositivos móveis -->
-<div class="side-menu" id="sideMenu">
-  <a href="#about">
-    <img src="https://cdn-icons-png.flaticon.com/512/5683/5683325.png" alt="Ícone de Sobre Mim">
-    Sobre Mim
-  </a>
-  <a href="#projects">
-    <img src="https://cdn-icons-png.flaticon.com/512/1087/1087840.png" alt="Ícone de Projetos">
-    Projetos
-  </a>
-  <a href="#contact">
-    <img src="https://cdn-icons-png.flaticon.com/512/9716/9716781.png" alt="Ícone de Contato">
-    Contato
-  </a>
-  <a href="javascript:void(0)" id="sideLogin"><img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login</a>
-</div>
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Planos Acessíveis</span>
+                <h2 class="section-title">Escolha o Plano Ideal</h2>
+                <p class="section-description">
+                    Sem taxas escondidas. Cancele quando quiser.
+                </p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <p>Perfeito para começar</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>
+                        <span class="amount">79</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Até 2 profissionais</li>
+                        <li><i class="fas fa-check"></i> Agendamentos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Lembretes por WhatsApp</li>
+                        <li><i class="fas fa-check"></i> Relatórios básicos</li>
+                        <li><i class="fas fa-check"></i> Suporte por email</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline">Começar Agora</a>
+                </div>
 
-<section class="hero">
-  <h1>Bem-vindo ao CoreDev</h1>
-  <p>Inovação e tecnologia para transformar suas ideias em realidade.</p>
-  <a href="#projects">Ver Projetos</a>
-</section>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Mais Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <p>Para barbearias em crescimento</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>
+                        <span class="amount">149</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Até 5 profissionais</li>
+                        <li><i class="fas fa-check"></i> Tudo do Starter +</li>
+                        <li><i class="fas fa-check"></i> Pagamento online</li>
+                        <li><i class="fas fa-check"></i> Relatórios avançados</li>
+                        <li><i class="fas fa-check"></i> App mobile</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-primary">Começar Agora</a>
+                </div>
 
-<section id="about" class="about">
-  <h2>Sobre Mim</h2>
-  <p>Sou um desenvolvedor apaixonado por tecnologia e inovação, focado em criar soluções inteligentes que impulsionam o futuro.</p>
-</section>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <p>Para redes e franquias</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>
+                        <span class="amount">299</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Profissionais ilimitados</li>
+                        <li><i class="fas fa-check"></i> Tudo do Professional +</li>
+                        <li><i class="fas fa-check"></i> Multi-unidades</li>
+                        <li><i class="fas fa-check"></i> API completa</li>
+                        <li><i class="fas fa-check"></i> White label</li>
+                        <li><i class="fas fa-check"></i> Gerente de sucesso dedicado</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline">Falar com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="projects" class="projects">
-  <h2>Projetos</h2>
-  <div class="project-list">
-    <div class="project-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Ícone Excel" style="width: 100px; margin-bottom: 20px;">
-      <h3>Projeto Excel - Gestão de Materiais</h3>
-      <p>Descrição curta sobre o projeto em Excel desenvolvido para controle de materiais na empresa.</p>
-      <a href="projeto1.html">Ver Projeto</a>
-    </div>
-  </div>
-</section>
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Depoimentos</span>
+                <h2 class="section-title">O que nossos clientes dizem</h2>
+                <p class="section-description">
+                    Junte-se a milhares de barbeiros satisfeitos
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Desde que comecei a usar o BarberPro, minhas faltas diminuíram 70% e meu faturamento aumentou 40%. A melhor decisão que tomei para minha barbearia!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Silva</h4>
+                            <p>Barbearia Clássica, São Paulo</p>
+                        </div>
+                    </div>
+                </div>
 
-<section id="contact" class="contact">
-  <h2>Contato</h2>
-  <form>
-    <input type="text" placeholder="Seu Nome" required>
-    <input type="email" placeholder="Seu Email" required>
-    <textarea rows="5" placeholder="Sua Mensagem"></textarea>
-    <button type="submit">Enviar Mensagem</button>
-  </form>
-</section>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Sistema intuitivo e completo. Meus clientes adoram poder agendar pelo celular. Economizo horas por semana que antes gastava atendendo telefone."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Roberto Mendes</h4>
+                            <p>Barber Shop Premium, Rio de Janeiro</p>
+                        </div>
+                    </div>
+                </div>
 
-<footer>
-  <p>&copy; 2024 - CoreDev. Todos os direitos reservados.</p>
-</footer>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Profissionalizou completamente meu negócio. Os relatórios me ajudam a tomar decisões estratégicas. Hoje tenho 3 unidades e gerencio tudo pelo app."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Fernando Costa</h4>
+                            <p>Rede Barber King, Belo Horizonte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Janela de Login -->
-<div class="login-modal" id="loginModal">
-  <h2>Login</h2>
-  <input type="text" id="username" placeholder="Usuário">
-  <div class="password-container">
-    <input type="password" id="password" placeholder="Senha">
-    <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="Exibir Senha" id="togglePassword">
-  </div>
-  <button id="loginSubmit">Entrar</button>
-  <div class="error-message" id="errorMessage"></div>
-</div>
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para Revolucionar sua Barbearia?</h2>
+                <p>Comece grátis hoje. Sem cartão de crédito. Cancele quando quiser.</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary btn-large">
+                        Começar Teste Grátis de 14 Dias
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="cta-features">
+                    <span><i class="fas fa-check-circle"></i> Configuração em 5 minutos</span>
+                    <span><i class="fas fa-check-circle"></i> Suporte em português</span>
+                    <span><i class="fas fa-check-circle"></i> Sem compromisso</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Script JavaScript para navegação suave, login/logout, abrir/fechar menu e overlay -->
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const sideMenu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('overlay');
-  const loginModal = document.getElementById('loginModal');
-  const loginButton = document.getElementById('loginButton');
-  const sideLogin = document.getElementById('sideLogin');
-  const togglePassword = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('password');
-  const loginSubmit = document.getElementById('loginSubmit');
-  const errorMessage = document.getElementById('errorMessage');
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-cut"></i>
+                        <span>BarberPro</span>
+                    </div>
+                    <p>A plataforma completa para modernizar sua barbearia e conquistar mais clientes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Produto</h4>
+                    <ul>
+                        <li><a href="#features">Recursos</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#">Integrações</a></li>
+                        <li><a href="#">Atualizações</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos</a></li>
+                        <li><a href="#">Segurança</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BarberPro. Todos os direitos reservados.</p>
+                <p>Feito com <i class="fas fa-heart"></i> para barbeiros brasileiros</p>
+            </div>
+        </div>
+    </footer>
 
-  // Abrir menu e mostrar overlay
-  hamburger.addEventListener('click', () => {
-    sideMenu.classList.toggle('open');
-    overlay.classList.toggle('show');
-  });
-
-  // Fechar menu ao clicar fora (overlay)
-  overlay.addEventListener('click', () => {
-    sideMenu.classList.remove('open');
-    overlay.classList.remove('show');
-  });
-
-  // Suave navegação
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      target.scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
-
-  // Exibir login modal
-  function showLoginModal() {
-    loginModal.classList.add('show');
-    overlay.classList.add('show');
-  }
-
-  loginButton.addEventListener('click', showLoginModal);
-  sideLogin.addEventListener('click', showLoginModal);
-
-  // Fechar modal ao clicar no overlay
-  overlay.addEventListener('click', () => {
-    loginModal.classList.remove('show');
-    overlay.classList.remove('show');
-  });
-
-  // Alternar visibilidade da senha
-  togglePassword.addEventListener('click', () => {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    togglePassword.src = type === 'password' 
-      ? 'https://cdn-icons-png.flaticon.com/512/159/159604.png' 
-      : 'https://cdn-icons-png.flaticon.com/512/7042/7042918.png';
-  });
-
-  // Simulação de login (básica)
-  loginSubmit.addEventListener('click', () => {
-    const username = document.getElementById('username').value;
-    const password = passwordInput.value;
-
-    if (username === 'admin' && password === 'AceSSo#@3038') {
-      errorMessage.textContent = 'Login bem-sucedido!';
-      loginModal.classList.remove('show');
-      overlay.classList.remove('show');
-      loginButton.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/1828/1828466.png" alt="Ícone de Logout">Sair';
-      sideLogin.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/1828/1828466.png" alt="Ícone de Logout">Sair';
-    } else {
-      errorMessage.textContent = 'Usuário ou senha inválidos!';
-    }
-  });
-
-  // Logout
-  loginButton.addEventListener('click', function() {
-    if (loginButton.textContent.includes('Sair')) {
-      loginButton.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login';
-      sideLogin.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/12120/12120346.png" alt="Ícone de Login">Login';
-    }
-  });
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
